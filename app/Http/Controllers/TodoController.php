@@ -24,6 +24,7 @@ class TodoController extends Controller
         $todo = Todo::create([
             'title' => $request->title,
             'user_id' => $request->user()->id,
+            'date'  => $request->date
         ]);
 
         return response()->json($todo);
@@ -39,7 +40,7 @@ class TodoController extends Controller
             'completed' => 'sometimes|boolean',
         ]);
 
-        $todo->update($request->only('title', 'completed'));
+        $todo->update($request->only('title', 'completed', 'date'));
 
         return response()->json($todo);
     }

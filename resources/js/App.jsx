@@ -19,8 +19,8 @@ function App() {
             <div className="">
                 <Link to="/"><img src={logo} alt="Logo" className="h-16 mx-auto mb-4" /></Link>
             </div>
-            <div className="">
-                <h1 className="text-2xl font-bold mb-4 text-center"><strong>Todo App</strong></h1>
+            <div className=" text-center">
+                <h1 className="text-2xl font-bold mb-0"><strong>Todo App</strong></h1>
             </div>
             <div className="text-right mr-3">
                 {!user ? (
@@ -30,7 +30,7 @@ function App() {
                   ) : (
                     <div className="">
                         <h3 className="font-bold">Welcome { user.name }, </h3>
-                        <Link to="/todo">Your Todo</Link> | 
+                        <Link to="/todo">Todo List</Link> | 
                         <Link to="/logout" className="ml-1">Logout</Link>
                     </div>
                 )}

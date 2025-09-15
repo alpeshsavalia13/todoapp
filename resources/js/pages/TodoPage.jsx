@@ -8,6 +8,7 @@ const TodoPage = () => {
   const { user } = useAuth();
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
   const [id, setId] = useState('');
 
   const fetchTodos = async () => {
@@ -24,7 +25,7 @@ const TodoPage = () => {
     if (id) {
       url = url + '/'+id;
     }
-    const { data } = await API.post(url, { title });
+    const { data } = await API.post(url, { title, date });
     if (id) {
       setTodos(todos.map(t => (t.id === id ? data : t)));
     } else {
@@ -32,11 +33,13 @@ const TodoPage = () => {
       setTodos([data, ...todos]);
     }
     setTitle('');
+    setDate('');
     setId('');
   };
 
   const startEdit = async(todo) => {
     setTitle(todo.title);
+    setDate(todo.date);
     setId(todo.id);
   };
 
@@ -52,6 +55,7 @@ const TodoPage = () => {
 
   const cancel = async(todo) => {
     setTitle('');
+    setDate('');
     setId('');
   };
 
@@ -61,6 +65,7 @@ const TodoPage = () => {
     <div className="mx-auto bg-white shadow-lg rounded-xl p-6">
         <h2 className="text-2xl font-bold mb-4">Todo</h2>
         <input className="w-full border border-gray-300 rounded p-2 mb-4" value={title} onChange={e => setTitle(e.target.value)} placeholder="New Todo" />
+        <input type="date" className="w-full border border-gray-300 rounded p-2 mb-4" value={date} onChange={e => setDate(e.target.value)} placeholder="Deadline" />
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onClick={addTodo}> { id ? 'Update' : 'Add'}</button>
         <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded ml-2" onClick={() => cancel()}>Cancel</button>
         <h2 className="text-2xl font-bold mt-4">List</h2>
@@ -70,6 +75,9 @@ const TodoPage = () => {
                     <tr>
                         <th scope="col" className="px-6 py-3">
                             Title
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Deadline
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Created At
@@ -90,6 +98,9 @@ const TodoPage = () => {
                               {todo.title}
                             </span>
                         </th>
+                        <td className="px-6 py-4">
+                            {todo.date}
+                        </td>
                         <td className="px-6 py-4">
                             {todo.created_at}
                         </td>
