@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Todo::class);
     }
+
+    public function expense()
+    {
+        return $this->hasMany(\App\Models\Expense::class);
+    }
 }

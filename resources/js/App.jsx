@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import TodoPage from './pages/TodoPage';
+import ExpensePage from './pages/ExpensePage';
 import HomePage from './pages/HomePage';
 import LogoutPage from './pages/LogoutPage';
 import { useAuth } from './context/AuthContext';
@@ -31,6 +32,7 @@ function App() {
                     <div className="">
                         <h3 className="font-bold">Welcome { user.name }, </h3>
                         <Link to="/todo">Todo List</Link> | 
+                        <Link to="/expense" className="ml-1">Expense List</Link> | 
                         <Link to="/logout" className="ml-1">Logout</Link>
                     </div>
                 )}
@@ -42,6 +44,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/todo" element={<ProtectedRoute><TodoPage /></ProtectedRoute>} />
+          <Route path="/expense" element={<ProtectedRoute><ExpensePage /></ProtectedRoute>} />
         </Routes>
     </main>
     </>

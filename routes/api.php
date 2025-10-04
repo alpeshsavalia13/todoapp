@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ExpenseController;
 //dd(\Config::get('session'));
 
 Route::middleware('sanctum')->get('/user', function (Request $request) {
@@ -20,4 +21,7 @@ Route::middleware('sanctum')->group(function () {
     Route::post('/todos', [TodoController::class, 'store']);
     Route::post('/todos/{id}', [TodoController::class, 'update']);
     Route::delete('/todos/{id}', [TodoController::class, 'destroy']);
+
+    Route::post('/expense/{id}', [ExpenseController::class, 'update']);
+    Route::resource('/expense', ExpenseController::class, ['names' => 'expense']);
 });
