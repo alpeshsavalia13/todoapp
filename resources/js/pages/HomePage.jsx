@@ -6,10 +6,9 @@ import Badge from '../components/Badge';
 
 const HomePage = () => {
   const { user } = useAuth();
-console.log(user);
   return (
     <div className="mx-auto bg-white shadow-lg rounded-xl p-6 text-center">
-        <h2 className="text-2xl font-bold mb-4">Welcome to Todo App.</h2>
+        <h2 className="text-2xl font-bold mb-4">Welcome to My Tracker.</h2>
     </div>
   );
 };

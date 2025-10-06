@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Todo App</title>
-    <link rel="manifest" href="/manifest.json">
+    <title>My Tracker</title>
+    <link rel="manifest" href="/pwa-manifest.json">
     <meta name="theme-color" content="#000000">
+    <script>
+        window.appUrl = "{{ config('app.url') }}";
+    </script>
     @viteReactRefresh
     @vite('resources/js/main.jsx')
 </head>

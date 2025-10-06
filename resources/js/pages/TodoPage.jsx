@@ -49,7 +49,7 @@ const TodoPage = () => {
   };
 
   const deleteTodo = async (id) => {
-    await API.delete(`/api/todos/${id}`);
+    await API.post(`/api/delete/${id}`);
     setTodos(todos.filter(t => t.id !== id));
   };
 

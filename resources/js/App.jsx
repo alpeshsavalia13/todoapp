@@ -21,7 +21,7 @@ function App() {
                 <Link to="/"><img src={logo} alt="Logo" className="h-16 mx-auto mb-4" /></Link>
             </div>
             <div className=" text-center">
-                <h1 className="text-2xl font-bold mb-0"><strong>Todo App</strong></h1>
+                <h1 className="text-2xl font-bold mb-0"><strong>My Tracker</strong></h1>
             </div>
             <div className="text-right mr-3">
                 {!user ? (

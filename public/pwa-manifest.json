@@ -1,6 +1,6 @@
 {
-  "name": "My Laravel PWA",
-  "short_name": "LaravelPWA",
+  "name": "My Tracker",
+  "short_name": "MyTracker",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -20,6 +20,7 @@ Route::middleware('sanctum')->group(function () {
     Route::get('/todos', [TodoController::class, 'index']);
     Route::post('/todos', [TodoController::class, 'store']);
     Route::post('/todos/{id}', [TodoController::class, 'update']);
+    Route::post('/todos/{id}', [TodoController::class, 'destroy']);
     Route::delete('/todos/{id}', [TodoController::class, 'destroy']);
 
     Route::post('/expense/{id}', [ExpenseController::class, 'update']);
