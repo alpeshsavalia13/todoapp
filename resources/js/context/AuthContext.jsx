@@ -11,7 +11,12 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const { data } = await API.get('/api/user');
-      setUser(data);
+      console.log(data);
+      if (data && data.id > 0) {
+        setUser(data);
+      } else {
+        setUser(null);
+      }
     } catch {
       setUser(null);
     }

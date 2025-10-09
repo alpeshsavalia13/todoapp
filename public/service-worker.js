@@ -1,56 +1,52 @@
-const CACHE_NAME = "todo-app-cache-v1";
-
-// Files to cache (update with your actual vite build files if needed)
-const urlsToCache = [
-  "/",                 // Home page
-  "/offline.html",     // Offline fallback
+var staticCacheName = "pwa-v" + new Date().getTime();
+var filesToCache = [
+    '/offline',
+    '/css/app.css',
+    '/js/app.js',
+    '/icons/icon-72x72.png',
+    '/icons/icon-96x96.png',
+    '/icons/icon-128x128.png',
+    '/icons/icon-144x144.png',
+    '/icons/icon-152x152.png',
+    '/icons/icon-192x192.png',
+    '/icons/icon-384x384.png',
+    '/icons/icon-512x512.png',
 ];
 
-// Install SW and cache initial files
-self.addEventListener("install", (event) => {
-  console.log("Service Worker: Install");
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    })
-  );
+// Cache on install
+self.addEventListener("install", event => {
+    this.skipWaiting();
+    event.waitUntil(
+        caches.open(staticCacheName)
+            .then(cache => {
+                return cache.addAll(filesToCache);
+            })
+    )
 });
 
-// Activate SW (cleanup old caches)
-self.addEventListener("activate", (event) => {
-  console.log("Service Worker: Activate");
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log("Deleting old cache:", cache);
-            return caches.delete(cache);
-          }
+// Clear cache on activate
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames
+                    .filter(cacheName => (cacheName.startsWith("pwa-")))
+                    .filter(cacheName => (cacheName !== staticCacheName))
+                    .map(cacheName => caches.delete(cacheName))
+            );
         })
-      );
-    })
-  );
+    );
 });
 
-// Fetch requests
-self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url);
-  // Skip API requests
-  if (url.pathname.startsWith('/api/')) {
-    return; // let network handle it
-  }
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return (
-        response ||
-        fetch(event.request).catch(() => {
-          // Fallback if offline and resource not in cache
-          if (event.request.mode === "navigate") {
-            return caches.match("/offline.html");
-          }
-        })
-      );
-    })
-  );
+// Serve from Cache
+self.addEventListener("fetch", event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                return response || fetch(event.request);
+            })
+            .catch(() => {
+                return caches.match('offline');
+            })
+    )
 });
