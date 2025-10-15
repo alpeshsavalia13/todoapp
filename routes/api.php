@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\MilkExpenseController;
 //dd(\Config::get('session'));
 
 Route::middleware('sanctum')->get('/user', function (Request $request) {
@@ -25,4 +26,7 @@ Route::middleware('sanctum')->group(function () {
 
     Route::post('/expense/{id}', [ExpenseController::class, 'update']);
     Route::resource('/expense', ExpenseController::class, ['names' => 'expense']);
+
+    Route::post('/milkexpense/{id}', [MilkExpenseController::class, 'update']);
+    Route::resource('/milkexpense', MilkExpenseController::class, ['names' => 'milkexpense']);
 });

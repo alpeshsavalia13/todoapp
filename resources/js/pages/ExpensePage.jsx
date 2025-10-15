@@ -65,7 +65,7 @@ const ExpensePage = () => {
         <h2 className="text-2xl font-bold mb-4">Expense</h2>
         <input className="w-full border border-gray-300 rounded p-2 mb-4" value={title} onChange={e => setTitle(e.target.value)} placeholder="New Expense" />
         <input type="date" className="w-full border border-gray-300 rounded p-2 mb-4" value={date} onChange={e => setDate(e.target.value)} placeholder="Date" />
-        <span></span><input type="number" step="0.1" min="1" className="w-full border border-gray-300 rounded p-2 mb-4" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Amount in ₹" />
+        <input type="number" step="0.1" min="1" className="w-full border border-gray-300 rounded p-2 mb-4" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Amount in ₹" />
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onClick={addExpense}> { id ? 'Update' : 'Add'}</button>
         <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded ml-2" onClick={() => cancel()}>Cancel</button>
         <h2 className="text-2xl font-bold mt-4">List</h2>
@@ -101,7 +101,7 @@ const ExpensePage = () => {
                             </span>
                         </th>
                         <td className="px-6 py-4">
-                            ₹ {expense.amount}
+                            ₹{expense.amount}
                         </td>
                         <td className="px-6 py-4">
                             {expense.title}
